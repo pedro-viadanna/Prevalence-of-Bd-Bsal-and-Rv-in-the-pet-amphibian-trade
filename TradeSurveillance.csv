@@ -1,0 +1,41 @@
+Response ID,Kit,Gross annual sales,Percentage amphibian sales,From: Breeding,From: Hobbyists,From: Retail pet stores,From: Wholesale/distributors,From: Imports,From: Wild-caught,From: Other,Sell to: Pet owners,Sell to: Retail pet stores,Sell to: Wholesale/distributors,Sell to: Exports,Sell to: Hobbyists,Sell to: Other,Did your business participate in the pilot amphibian project,N_habitats,Aquatic,Both,Terrestrial,Quarantine,LengthQuarantine,TestQuarantine,LocationQuarantine,DisinfectWater,DisinfectSolids,Gloves,Handling,Feeding,Cleaning,Change,Habitats,Tested,Bd,Rv
+R_pQ8W5RsSsoTgk5b,Returned,"$5,000 to 50,000",26% to 50%,49,50,0,0,1,0,0,50,0,15,10,25,0,No,50,35,2.5,12.5,Yes,One month,No,Separate container,No,No,Yes,Yes,No,No,Groups,50,30,1,0
+R_3qIO8312qi3PMi9,Returned,"< $5,000",76% to 100%,90,10,0,0,0,0,0,90,0,0,0,10,0,No,6,0,3,3,Yes,30 days,No,Separate container,No,No,Yes,Yes,No,No,Individuals,6,5,0,0
+R_2Bycno9ZudwEcrI,Returned,"$5,000 to 50,000",76% to 100%,80,20,0,0,0,0,0,10,70,0,0,20,0,Unsure,24,0,0,24,Yes,"1-3 months, same room, but cared for last","Sometimes, depends on source",Separate container,No,No,No,No,No,No,NA,24,11,0,0
+R_2AS6IMiJ7D2Kovw,Returned,"< $5,000",< 10%,25,50,25,0,0,0,0,100,0,0,0,0,0,No,15,0,1.5,13.5,Yes,"Indefinitely, I don't mix any animals",No,Separate container,No,No,Yes,Yes,No,Yes,Individuals,15,8,0,0
+R_3Nzg8tEmVoChJUS,Returned,"> $1,000,000",< 10%,0,0,0,100,0,0,0,100,0,0,0,0,0,No,4,1,0,3,No,NA,NA,NA,No,No,Yes,Yes,No,Yes,Groups,4,3,0,0
+R_22ys0r6PWjrwvOK,Returned,"> $1,000,000",< 10%,0,0,0,100,0,0,0,100,0,0,0,0,0,No,4,1,0,3,No,NA,NA,NA,No,No,Yes,Yes,Yes,Yes,Individuals,4,2,0,0
+R_2X0ZHPEtQYxJHD6,Returned,"> $1,000,000",< 10%,0,0,0,100,0,0,0,100,0,0,0,0,0,No,4,1,0,3,No,NA,NA,NA,No,No,Yes,No,No,Yes,Groups,4,1,0,0
+R_ywDxpmvNVPeaMbD,Returned,"$5,000 to 50,000",76% to 100%,80,20,0,0,0,0,0,90,10,0,0,0,0,No,20,4,8,8,Yes,6 weeks,No,A separate room,No,No,Yes,Yes,Yes,Yes,Groups,20,11,0,0
+R_3uyWiDTzKR8u7Qb,Returned,"< $5,000",< 10%,5,70,0,0,10,15,0,90,0,0,0,10,0,Unsure,6,2.4,0.6,3,Yes,30 days,No,a separate room,No,No,Yes,Yes,No,Yes,Groups,6,3,0,0
+R_3J8RqkYoVOqv4MF,Returned,"< $5,000",76% to 100%,70,28,2,0,0,0,0,90,2,0,0,8,0,Yes,134,107.2,24.12,2.68,Yes,3 months,No,A separate room,"Yes, bleach","Yes, bleach, dry, doublebag before disposal",Yes,No,No,Yes,Groups,134,24,0,0
+R_6XLGepWXHq0xsl3,Returned,"> $1,000,000",< 10%,0,20,0,40,10,30,0,100,0,0,0,0,0,No,2,1,0,1,No,NA,NA,NA,No,No,Yes,Yes,No,Yes,Groups,2,2,0,1
+R_54uQgrII1W6UUnl,Returned,"> $1,000,000",10% to 25%,0,20,0,40,10,30,0,100,0,0,0,0,0,No,2,1,0,1,No,NA,NA,NA,No,No,Yes,Yes,No,Yes,Groups,2,2,0,0
+R_3SeZvenP11PpxZL,Returned,"> $1,000,000",10% to 25%,0,20,0,40,10,30,0,100,0,0,0,0,0,No,2,0,0,2,No,NA,NA,NA,No,No,Yes,Yes,No,Yes,Groups,2,2,0,0
+R_3iQgM5xi7ip8X93,Returned,"> $1,000,000",10% to 25%,0,20,0,40,10,30,0,100,0,0,0,0,0,No,2,1,0,1,No,NA,NA,NA,No,No,Yes,Yes,No,Yes,Groups,2,1,0,0
+R_6TXf1yiabHIBcSZ,Returned,"> $1,000,000",10% to 25%,0,20,0,40,10,30,0,100,0,0,0,0,0,No,2,0,0,2,No,NA,NA,NA,No,No,Yes,Yes,No,Yes,Groups,2,2,0,0
+R_1CjpN78LbmgPOvu,Not returned,"< $5,000",26% to 50%,20,20,0,60,0,0,0,100,0,0,0,0,0,No,13,0,0,13,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_2tgOdT4GkyMk2K4,Not returned,"< $5,000",76% to 100%,0,20,80,0,0,0,0,100,0,0,0,0,0,No,5,0,0,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_1f43DQm4zrjTvmA,Not returned,"< $5,000",76% to 100%,90,10,0,0,0,0,0,50,0,0,0,50,0,No,50,0,0,50,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_2dz1YeamRfbm6o0,Not returned,"> $1,000,000",< 10%,0,0,0,50,30,20,0,0,90,10,0,0,0,Yes,10,0,3,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_3p9Mjgk2htMMGx2,Not returned,"$5,000 to 50,000",10% to 25%,0,25,25,50,0,0,0,75,0,0,0,25,0,No,4,0,0,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_1eJqiM9GnA7reQE,Not returned,"$200,001 to $1,000,000",10% to 25%,20,10,0,70,0,0,0,50,0,20,0,30,0,No,12,3,2,7,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_2YlIC3SCTYtR5SQ,Not returned,"$5,000 to 50,000",< 10%,90,9,0,0,1,0,0,99,0,0,0,1,0,No,4,0,4,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_3kbkOKhBgoyWl0Q,Not returned,"$5,000 to 50,000",76% to 100%,0,100,0,0,0,0,0,25,0,0,0,75,0,No,40,0,2,38,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_W6vOZdzhBUqrhfj,Not returned,"> $1,000,000",< 10%,0,0,0,100,0,0,0,100,0,0,0,0,0,No,4,1,0,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_2zZStCaOhFahvYJ,Not returned,"> $1,000,000",< 10%,0,0,0,100,0,0,0,100,0,0,0,0,0,No,4,1,0,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_2WuR0JPknQmfCjM,Not returned,"< $5,000",76% to 100%,5,75,0,0,20,0,0,80,0,0,0,20,0,No,40,0,0,40,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_2Ve84SW5F5y1zbR,Not returned,"< $5,000",< 10%,25,0,25,0,0,0,50,100,0,0,0,0,0,No,3,1.5,0.75,0.75,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_17jSBf5FiIUk0hZ,Not returned,"$5,000 to 50,000",< 10%,50,50,0,0,0,0,0,100,0,0,0,0,0,No,10,2.5,3.5,4,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_3ZQgi39OR5gDV0B,Not returned,"> $1,000,000",10% to 25%,20,0,0,40,10,30,0,100,0,0,0,0,0,No,2,0,0,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_1RjzPoq50E2g4kD,Not returned,"> $1,000,000",10% to 25%,0,20,0,40,10,30,0,100,0,0,0,0,0,No,2,1,0,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_323WJqNOPoVsocs,Not returned,"> $1,000,000",10% to 25%,0,20,0,40,10,30,0,100,0,0,0,0,0,No,2,1,0,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_6eWEI5yN8Qe48Uh,Not returned,"$50,001 to $200,000",10% to 25%,60,25,0,15,0,0,0,50,0,0,0,50,0,No,50,0,5,45,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_5kNTGVMogIhTAX5,Not returned,"$200,001 to $1,000,000",< 10%,0,0,0,100,0,0,0,100,0,0,0,0,0,No,4,0,0,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_5QYBjshmCPcGKHC,Not returned,"$200,001 to $1,000,000",10% to 25%,0,25,0,75,0,0,0,80,0,0,0,20,0,No,8,1.6,1.6,4.8,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_7OnzlYpRRwK1bvX,Not returned,"$200,001 to $1,000,000",< 10%,0,20,0,75,0,5,0,100,0,0,0,0,0,No,8,3.2,1.6,3.2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_3EfZv4z1YtaNlJX,Not returned,"$50,001 to $200,000",< 10%,10,50,30,0,0,10,0,50,0,0,0,25,25,No,12,6,3,3,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_50fK0gQPUNsqgAV,Not returned,"$200,001 to $1,000,000",< 10%,0,20,0,80,0,0,0,100,0,0,0,0,0,No,10,2.5,2.5,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_5wMy62XAb770GmR,Not returned,"$5,000 to 50,000",76% to 100%,75,5,0,20,0,0,0,75,5,20,0,0,0,No,25,18.75,1.25,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_3OqxOYpnCfBr5EC,Not returned,"$200,001 to $1,000,000",26% to 50%,25,25,0,50,0,0,0,100,0,0,0,0,0,No,13,3.25,3.25,6.5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+R_1U5T72tmnnEgcYj,Not returned,"$200,001 to $1,000,000",< 10%,0,0,0,100,0,0,0,100,0,0,0,0,0,No,2,1,0,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
