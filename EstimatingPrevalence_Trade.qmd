@@ -1,6 +1,9 @@
 ---
 title: "Estimating prevalence within and among facilities"
 format: pdf
+execute:
+  warning: false
+  message: false
 ---
 
 ## Approach & assumptions
@@ -13,10 +16,12 @@ Third, participants selected $S$ habitats to sample out a finite number, $N$, of
 
 Further, we make the following simplifying assumptions:
 
-  * If an infection were present within a habitat, we would detect it (i.e., no false negatives, diagnostic sensitivity = 1) and if not, our methods would not produce a false positives (i.e., diagnostic specificity = 1). Our model could be adapted to account for imperfect diagnostic performance, but a) this would require additional assumptions about how sensitivity scaled with population size, conditions, host species, etc. for both swab- and eDNA-based samples and b) this would lead to issues of identifiability. Moreover, it is reasonable to assume that if a pathogen is present in one individual within a habitat, it would rapidly spread to others in the habitat, increasing the chance of detection by any methods.
+  * If an infection were present within a habitat, we would detect it (i.e., no false negatives, diagnostic sensitivity = 1) and if not, our methods would not produce a false positives (i.e., diagnostic specificity = 1). Our model could be adapted to account for imperfect diagnostic performance, but a) this would require additional assumptions about how sensitivity scaled with population size, conditions, host species, etc. for both swab- and eDNA-based samples and b) this would lead to issues of identifiability. Moreover, it is reasonable to assume that if a pathogen is present in one individual within a habitat, it would rapidly spread to others in the habitat (Forzán et al. 2008; Fitzpatrick et al. 2018), increasing the chance of detection by any methods.
   * Facility personnel sampled randomly from among their habitats, as instructed, so that the samples we received are representative of their facilities. 
   * The prevalence of infection in infected facilities is roughly the same (i.e., we set aside the possibility that some might have a very low prevalence and others a much higher prevalence of infection among habitats). Given our actual data, there is little reason to 
   * Participating facilities are representative of the industry (Alternatively, our inference should be restricted to the sorts of facilities that are likely to participate in activities like this anonymous surveillance program)
+  
+Finally, we include in our estimates of prevalence the data from Pearhill et. al (in review), which was the pilot version of this surveillance project. The sampling methods were very similar and their sample of participants was taken from the same pool of facilities involved in the amphibian pet trade. Just one participant in the current surveillance program reported having participated in the pilot project as well, a hobbyist with strong biosecurity practices who's samples did not test positive for any pathogens in the current project. Because their information cannot be matched between projects due to the anonymous nature of our data collection we treat these separate submissions, which occurred over a year apart, as independent in our analyses. Collectively, this brings our sample size to 23.
   
 ## Model
 
@@ -30,7 +35,11 @@ The first term accounts for the dual explanations for negative samples: the faci
 
 The summations account for the probability of observing $x$ positive samples assuming that $i=x, x+1, ..., N-S+x$ habitats within the facility were infected (specified by the hypergeometric distribution), weighted by the probability of each possible value of $i$ infected habitats occurring given the prevalence, $p$ (described by the binomial distribution). 
 
-We implemented this model in a Bayesian framework using the Stan language assuming fairly weak priors for $p$ and $\theta$, using $\text{Beta}(1.1,2)$ for both. This prior places zero probability on values of zero and one, and then a tendency for lower values to be more likely than higher values. It has a mean of 0.355 and a model of 0.091. 
+We implemented this model in a Bayesian framework using the Stan language assuming fairly weak, but regularizing priors for $p$ and $\theta$. We assumed a prior of $\theta \sim \text{Beta}(1.5, 3.25)$, which has a mode of `r round( (1.5-1)/(1.5 + 3.25-2), 3 )`, matching the proportion of surveyed facilities in the pet trade that report having had Rv in their facility at least once (reports of Bd were lower; Cavasos et al., 2023b) and very close to the 5 (23.8\%) of the 21 breeding facilities in the Czech Republic reported to have Bd (Havlíková et al., 2015). It also allows for a wide range of possible values (95% interval = `r round(qbeta(0.025, 1.5, 3.25), 3)` -- `r round(qbeta(0.975, 1.5, 3.25), 3)` ) that account for other estimates (e.g., Bd was detected in 1/3 pet stores in Canada; Govindarajulu et al. 2017; 5/7 pet stores in Singapore; Gilbert et al. 2012).
+
+Prior estimates of Bd prevalence suggest infections are rare---7 (1.1\%) of 639 pet salamanders in the U.S.A. (Klocke et a. 2017), 5\% in pet amphibians surveyed in the Czech Republic (Havlíková et al., 2015), and 9\% in pet stores in Singapore with infection detected (Gilbert et al. 2012)---to moderately common among animals---28/% in pet stores in Japan (Goka et al. 2009)---but it is unclear if these samples represent the prevalence among _habitats_ within stores or collections (e.g., Frías-Alvarezet al. 2008 report 76 of 90 captive Axolotls were infected with Bd, but it is not clear if these were all from the same habitat). In some cases the results were broken out by species, which would seems to represent a minimum number of habitats: Govindarajulu et al. (2017) reported just one of eight species in the affected store had Bd and Havlíková et al., (2015) report that 8 (6.8\%) of 117 captive species-by-collections had Bd, but none in the four pet trade collections. We thus use a prior of $p \sim \text{Beta}(2, 6)$, which has a mode of `r round( (2-1)/(2+6-2), 3 )` and a 95% interval of `r round(qbeta(0.025, 2, 6), 3)` -- `r round(qbeta(0.975, 2, 6), 3)`, consistent with all but very high or especially low prevalence among habitats.
+
+Bsal has not been found in the U.S.A. despite extensive testing, including among the 639 samples from 65 species of salamanders submitted by 56 individual owners (Klocke et al. 2017), nor in Canadian (Govindarajulu et al. 2017) or Mexican amphibians (Basanta et al. 2022). This is most consistent with a very low prevalence of infection among facilities and habitats. Similarly, Jung et al. did not detect Bsal in any of approximately 68 habitats in nine private collections of salamanders in Germany and Lastra González et al(2022) found no Bsal in 10 amphibian collections. In contrast, a contract-tracing study in response to Bsal mortality in a captive collection (Fitzpatrick et al. 2018), animals from of 15 (31.3\%) of 48 species in seven (63.6\%) of 11 collections tested positive for Bsal. However, because these samples were targeted from high-risk facilities (i.e., it was not a random, representative sample) known to have contact with a Bsal focus, these estimates of prevalence are unrealistically high for our study. Given the available data on Bsal's absence in the U.S.A., we use $\theta \sim \text{Beta}(1, 65)$, which provides an 95\% upper bound on prevalence among facilities of 0.045, and $p \sim \text{Beta}(1,10)$, which provides an 95\% upper bound on prevalence among habitats within a facility of 0.259. In short, we would be exceedingly surprised if Bsal were found in our samples.
 
 
 ## Results
@@ -42,11 +51,19 @@ library(rstan)
 library(MASS)
 ```
 
+The stan model:
 ```{r}
+#| output: false 
+#| message: false
 # compile the zero-inflated hypergeometric model
 m <- stan_model("m_zihg.stan") 
 ```
 
+```{r}
+print(m)
+```
+
+The data:
 ```{r}
 # Load in data
 df <- read_csv("TradeSurveillance.csv")
@@ -65,6 +82,10 @@ with(df %>% filter(Kit == "Returned"), {
 
 
 datBd$Nsamples = length(datBd$N)
+datBd$theta_a = 1.5
+datBd$theta_b = 3.25
+datBd$prev_a = 2
+datBd$prev_b = 6
 
 # data list for Rv results
 datRv <- datBd 
@@ -74,6 +95,10 @@ datRv$pos = c( df %>% filter(Kit == "Returned") %>% .$Rv,
 # data list for Bsal results
 datBsal <- datBd 
 datBsal$pos = rep(0, datBsal$Nsamples)
+datBsal$theta_a = 1
+datBsal$theta_b = 65
+datBsal$prev_a = 1
+datBsal$prev_b = 10
 ```
 
 
@@ -86,53 +111,61 @@ datBsal$pos = rep(0, datBsal$Nsamples)
 fitBd <- sampling(m,
                 data=datBd,
                 chains=4,
-                cores=4, iter=5000)
+                cores=4, iter=5e4)
 ```
 
 ```{r}
-fitBd
+print(fitBd, digits_summary = 3)
 pairs(fitBd, pars=c("theta", "prev"))
+
+samples <- as_tibble( extract(fitBd, pars =c("theta", "prev")) )
 ```
 
-The model is quite certain that _Bd_ infections are rare within facilities ($p=0.04$, 95% CI =  0.01 -- 0.10), yet there is a great deal of uncertainty about the fraction of facilities that might harbor _Bd_. The mean posterior estimate is that nearly half of facilities ($\theta = 0.46$) have _Bd_ infections, though the credible intervals are quite wide (95\% CI = 0.13 -- 0.86). Empirically, we observed that `r sum(datBd$pos>0)` out of the `r datBd$Nsamples` facilities had _Bd_, so ($\theta \geq 3/23 = 0.13$). However, because prevalence of infections within facilities is quite low, it is very possible our sampling missed infections in other facilities, especially those in which we sampled only a small fraction of the habitats. 
+The model is quite certain that _Bd_ infections are rare within facilities ($\bar{p}=$ `r round(mean(samples$prev), 3)`,  95% CI =  `r round(quantile(samples$prev, 0.025), 3)` -- `r round(quantile(samples$prev, 0.975), 3)`), yet there is a great deal of uncertainty about the fraction of facilities that might harbor _Bd_. Empirically, we observed that `r sum(datBd$pos>0)` out of the `r datBd$Nsamples` facilities had _Bd_, so, naively we might expect $\theta \geq 3/23 = 0.130$. However, because prevalence of infections within facilities is low, it is possible, even likely, that our sampling missed infections in other facilities, especially those in which we have samples from only a small fraction of the habitats present, which means our data are consistent with higher values of prevalence among facilities. Indeed, the mean posterior estimate is that more than a third of facilities ($\bar{\theta}=$, `r round(mean(samples$theta), 3)`) have _Bd_ infections, though the credible intervals are quite wide (95\% CI =  `r round(quantile(samples$theta, 0.025), 3)` -- `r round(quantile(samples$theta, 0.975), 3)`). 
 
-This figure shows, from the outside in, the 80\%, 90\%, and 95\% interval of the prior (dotted lines) and posterior (solid lines) estimates of the prevlance within and among facilities. 
+This figure shows, from the outside in, the 80\%, 90\%, and 95\% interval of the prior (dotted lines) and posterior (solid lines) estimates of the prevalence within and among facilities. The shading represents the density of the posterior. The dark blue point is the mode of the posterior, the black point the median, and the white point the mean.
 ```{r}
-priors <- tibble(theta = rbeta(4e4, 1.1, 2),
-                 prev = rbeta(4e4, 1.1, 2))
-samples <- as_tibble( extract(fitBd, pars =c("theta", "prev")) )
+priors <- tibble(theta = rbeta(4e5, datBd$theta_a, datBd$theta_b),
+                 prev = rbeta(4e5,datBd$prev_a, datBd$prev_b))
 
 # Get cutoffs for prior join distribution. Following https://rdrr.io/cran/emdbook/src/R/bayes.R
-dens <- kde2d(priors$theta, priors$prev, n=100, lims = c(0, 1, 0, 1))
-c1 <- cumsum(sort(dens$z))*0.01*0.01
+dens <- kde2d(priors$theta, priors$prev, n=250, lims = c(0, 1, 0, 1))
+c1 <- cumsum(sort(dens$z))*(1/250^2)
 ## trying to find level containing 80%, 90%, and 95% of volume ...
 priorlevels <- sapply(c(0.8, 0.9, 0.95), function(x) {approx(c1, sort(dens$z), xout=1-x)$y})
 
 
 # repeat for posterior
-dens <- kde2d(samples$theta, samples$prev, n=100, lims = c(0, 1, 0, 1))
-c1 <- cumsum(sort(dens$z))*0.01*0.01
+dens <- kde2d(samples$theta, samples$prev, n=250, lims = c(0, 1, 0, 1))
+c1 <- cumsum(sort(dens$z))*(1/250^2)
 ## trying to find level containing 95% of volume ...
 postlevels <- sapply(c(0.8, 0.9, 0.95), function(x) {approx(c1, sort(dens$z), xout=1-x)$y})
 
 
 ggplot(samples, aes(theta, prev)) + 
-  stat_density_2d_filled() +
-  stat_density_2d(breaks = postlevels, color="black") + 
-  stat_density_2d(data=priors, breaks = priorlevels, color = "black", lty=3) +
+  stat_density_2d_filled(breaks = c(5*(1:10))) +
+  stat_density_2d(breaks = postlevels, color="black", h = c(1,1)/12) + 
+  stat_density_2d(data=priors, breaks = priorlevels, color = "black", lty=3, h = c(1,1)/12) +
+  annotate(geom="point", color = "darkblue",
+           x=dens$x[ which(as.data.frame(dens$z) == max(dens$z), arr.ind = T)[1] ], 
+           y=dens$y[ which(as.data.frame(dens$z) == max(dens$z), arr.ind = T)[2] ]) + 
+  annotate(geom="point", x = mean(samples$theta), y=mean(samples$prev), pch=21, fill="white") +
+  annotate(geom="point", x = median(samples$theta), y=median(samples$prev)) + 
   scale_fill_brewer("Probability\ndensity") + 
   scale_x_continuous(expression(Prevalence~among~facilities~(theta)), 
                      limits=c(0,1), expand = c(0, 0)) +
   scale_y_continuous(expression(Prevalence~within~~infected~facilities~(p)),
                      limits=c(0,1), expand = c(0, 0)) + 
   labs(title="Bd prevalence") + 
-  theme_bw() + 
-  coord_equal()
+  coord_equal() +
+  theme_bw() +
+  theme(legend.position = "none")
+  
 
-ggsave("Bd_prevalence.pdf", width=4, height=3)
+ggsave("Bd_prevalence.pdf", width=4, height=4)
 ```
 
-
+Collectively, this suggests that any given habitat in the pet trade would have an aggregate probability of `r round( mean(samples$theta * samples$prev), 3)` (95\%CI = `r round( quantile(samples$theta * samples$prev, probs = 0.025), 3)` -- `r round( quantile(samples$theta * samples$prev, probs = 0.975), 3)`) of having Bd. 
 
 
 ## _Rv_
@@ -144,41 +177,46 @@ ggsave("Bd_prevalence.pdf", width=4, height=3)
 fitRv <- sampling(m,
                 data=datRv,
                 chains=4,
-                cores=4, iter=5000)
+                cores=4, iter=5e4)
 ```
 
 ```{r}
-fitRv
+print(fitRv, digits_summary = 3)
 pairs(fitRv, pars=c("theta", "prev"))
+
+samples <- as_tibble( extract(fitRv, pars =c("theta", "prev")) )
 ```
 
-Ranavirus was only detected in one facility, in one of its two habitats. The estimated prevalence within facilities is thus somewhat higher than for _Bd_ ($p=0.32$), but with little confidence (95% CI =  0.02 -- 0.77) in the estimate. The prevalence of infection among facilities is estimated to by lower than for _Bd_ ($\theta = 0.12$, 95% CI = 0.01 -- 0.37). 
+Ranavirus was only detected in one facility, in one of its two habitats. The estimated prevalence within facilities is thus somewhat higher than for _Bd_ ($\bar{p}=$ `r round(mean(samples$prev), 3)`), but with little confidence (95% CI =  `r round(quantile(samples$prev, 0.025), 3)` -- `r round(quantile(samples$prev, 0.975), 3)`) in the estimate. The prevalence of infection among facilities is estimated to by lower than for _Bd_ ($\bar{\theta}=$, `r round(mean(samples$theta), 3)`, 95\% CI =  `r round(quantile(samples$theta, 0.025), 3)` -- `r round(quantile(samples$theta, 0.975), 3)`).
 
 
-This figure shows, from the outside in, the 80\%, 90\%, and 95\% interval of the prior (dotted lines) and posterior (solid lines) estimates of the prevlance within and among facilities. 
 ```{r}
-priors <- tibble(theta = rbeta(4e4, 1.1, 2),
-                 prev = rbeta(4e4, 1.1, 2))
-samples <- as_tibble( extract(fitRv, pars =c("theta", "prev")) )
+priors <- tibble(theta = rbeta(4e5, datRv$theta_a, datRv$theta_b),
+                 prev = rbeta(4e5,datRv$prev_a, datRv$prev_b))
 
 # Get cutoffs for prior join distribution. Following https://rdrr.io/cran/emdbook/src/R/bayes.R
-dens <- kde2d(priors$theta, priors$prev, n=100, lims = c(0, 1, 0, 1))
-c1 <- cumsum(sort(dens$z))*0.01*0.01
+dens <- kde2d(priors$theta, priors$prev, n=250, lims = c(0, 1, 0, 1))
+c1 <- cumsum(sort(dens$z))*(1/250^2)
 ## trying to find level containing 80%, 90%, and 95% of volume ...
 priorlevels <- sapply(c(0.8, 0.9, 0.95), function(x) {approx(c1, sort(dens$z), xout=1-x)$y})
 
 
 # repeat for posterior
-dens <- kde2d(samples$theta, samples$prev, n=100, lims = c(0, 1, 0, 1))
-c1 <- cumsum(sort(dens$z))*0.01*0.01
+dens <- kde2d(samples$theta, samples$prev, n=250, lims = c(0, 1, 0, 1))
+c1 <- cumsum(sort(dens$z))*(1/250^2)
 ## trying to find level containing 95% of volume ...
 postlevels <- sapply(c(0.8, 0.9, 0.95), function(x) {approx(c1, sort(dens$z), xout=1-x)$y})
 
 
 ggplot(samples, aes(theta, prev)) + 
-  stat_density_2d_filled(breaks=c(0,3,4:10, 15)) +
-  stat_density_2d(breaks = postlevels, color="black") +
-  stat_density_2d(data=priors, breaks = priorlevels, color = "black", lty=3) +
+  stat_density_2d_filled(breaks=3*(1:9)) +
+  stat_density_2d(breaks = postlevels, color="black", h = c(1,1)/15) +
+  stat_density_2d(data=priors, breaks = priorlevels, color = "black", lty=3, h = c(1,1)/12) +
+  annotate(geom="point", color = "darkblue",
+           x=dens$x[ which(as.data.frame(dens$z) == max(dens$z), arr.ind = T)[1] ], 
+           y=dens$y[ which(as.data.frame(dens$z) == max(dens$z), arr.ind = T)[2] ]) + 
+  annotate(geom="point", x = mean(samples$theta), y=mean(samples$prev), pch=21, fill="white") +
+  annotate(geom="point", x = median(samples$theta), y=median(samples$prev)) + 
   scale_fill_brewer("Probability\ndensity") + 
   scale_x_continuous(expression(Prevalence~among~facilities~(theta)), 
                      limits=c(0,1), expand = c(0, 0)) +
@@ -186,12 +224,13 @@ ggplot(samples, aes(theta, prev)) +
                      limits=c(0,1), expand = c(0, 0)) + 
 labs(title="Rv prevalence") + 
   theme_bw() + 
-  coord_equal()
+  coord_equal() +
+  theme(legend.position = "none")
 
-ggsave("Rv_prevalence.pdf", width=4, height=3)
+ggsave("Rv_prevalence.pdf", width=4, height=4)
 ```
 
-
+Collectively, this suggests that any given habitat in the pet trade would have a probability of `r round( mean(samples$theta * samples$prev), 3)` (95\%CI = `r round( quantile(samples$theta * samples$prev, probs = 0.025), 3)` -- `r round( quantile(samples$theta * samples$prev, probs = 0.975), 3)`) of having Rv. Notice the greater uncertainty in this estimate because of the high uncertainty about prevalence within facilities; the only positives came from a facility with only two habitats.
 
 ## _Bsal_
 ```{r}
@@ -202,51 +241,63 @@ ggsave("Rv_prevalence.pdf", width=4, height=3)
 fitBsal <- sampling(m,
                 data=datBsal,
                 chains=4,
-                cores=4, iter=5000)
+                cores=4, iter=5e4)
 ```
 
 ```{r}
-fitBsal
+print(fitBsal, digits_summary = 3)
 pairs(fitBsal, pars=c("theta", "prev"))
+
+samples <- as_tibble( extract(fitBsal, pars =c("theta", "prev")) )
 ```
 
-Bsal was never detected and so, considering only our samples (and not prior work), our best estimate for prevalence within facilities is $p=0.24$ (95% CI =  0 -- 0.82) and that for the prevalence of infection among facilities is $\theta = 0.10$ (95% CI = 0 -- 0.49). 
+Bsal was never detected and so, considering only our samples (and not prior work), our best estimate for prevalence within facilities is $\bar{p}=$ `r round(mean(samples$prev), 3)` (95% CI =  `r round(quantile(samples$prev, 0.025), 3)` -- `r round(quantile(samples$prev, 0.975), 3)`) and that for the prevalence of infection among facilities is $\bar{\theta}=$, `r round(mean(samples$theta), 3)` (95\% CI = `r round(quantile(samples$theta, 0.025), 3)` -- `r round(quantile(samples$theta, 0.975), 3)`). 
 
 
-This figure shows, from the outside in, the 80\%, 90\%, and 95\% interval of the prior (dotted lines) and posterior (solid lines) estimates of the prevlance within and among facilities. 
+
 ```{r}
-priors <- tibble(theta = rbeta(4e4, 1.1, 2),
-                 prev = rbeta(4e4, 1.1, 2))
-samples <- as_tibble( extract(fitBsal, pars =c("theta", "prev")) )
+priors <- tibble(theta = rbeta(4e5, datBsal$theta_a, datBsal$theta_b),
+                 prev = rbeta(4e5,datBsal$prev_a, datBsal$prev_b))
 
 # Get cutoffs for prior join distribution. Following https://rdrr.io/cran/emdbook/src/R/bayes.R
-dens <- kde2d(priors$theta, priors$prev, n=100, lims = c(0, 1, 0, 1))
-c1 <- cumsum(sort(dens$z))*0.01*0.01
+dens <- kde2d(priors$theta, priors$prev, n=100, lims = c(0, 0.5, 0, 0.25))
+c1 <- cumsum(sort(dens$z))*(1/100^2)
 ## trying to find level containing 80%, 90%, and 95% of volume ...
 priorlevels <- sapply(c(0.8, 0.9, 0.95), function(x) {approx(c1, sort(dens$z), xout=1-x)$y})
 
 
 # repeat for posterior
-dens <- kde2d(samples$theta, samples$prev, n=100, lims = c(0, 1, 0, 1))
+dens <- kde2d(samples$theta, samples$prev, n=100, lims = c(0, 0.5, 0, 0.25))
 c1 <- cumsum(sort(dens$z))*0.01*0.01
 ## trying to find level containing 95% of volume ...
 postlevels <- sapply(c(0.8, 0.9, 0.95), function(x) {approx(c1, sort(dens$z), xout=1-x)$y})
 
 
 ggplot(samples, aes(theta, prev)) + 
-  stat_density_2d_filled() +
-  stat_density_2d(breaks = postlevels, color="black") +
-  stat_density_2d(data=priors, breaks = priorlevels, color = "black", lty=3) +
+  stat_density_2d_filled(breaks=c(20, 75*(2:11))) +
+  stat_density_2d(breaks = postlevels, color="black", h=c(1,1)/10) +
+  stat_density_2d(data=priors, breaks = priorlevels, color = "black", lty=3, h=c(1,1)/20) +
+  annotate(geom="point", color = "darkblue",
+           x=dens$x[ which(as.data.frame(dens$z) == max(dens$z), arr.ind = T)[1] ], 
+           y=dens$y[ which(as.data.frame(dens$z) == max(dens$z), arr.ind = T)[2] ]) + 
+  annotate(geom="point", x = mean(samples$theta), y=mean(samples$prev), pch=21, fill="white") +
+  annotate(geom="point", x = median(samples$theta), y=median(samples$prev)) + 
   scale_fill_brewer("Probability\ndensity") + 
   scale_x_continuous(expression(Prevalence~among~facilities~(theta)), 
-                     limits=c(0,1), expand = c(0, 0)) +
+                     limits=c(0,0.5), expand = c(0, 0)) +
   scale_y_continuous(expression(Prevalence~within~~infected~facilities~(p)),
-                     limits=c(0,1), expand = c(0, 0)) + 
+                     limits=c(0,0.5), expand = c(0, 0)) + 
 labs(title="Bsal prevalence") + 
   theme_bw() + 
-  coord_equal()
+  coord_equal() +
+  theme(legend.position = "none")
 
-ggsave("Bsal_prevalence.pdf", width=4, height=3)
+ggsave("Bsal_prevalence.pdf", width=4, height=4)
 ```
+
+
+
+Our results place the upper 95% CI on the probability a habitat in the U.S. pet trade has Bsal at `r round( quantile(samples$theta * samples$prev, probs = 0.95), 3)`.
+
 
 
